@@ -9,10 +9,9 @@ public class ArrayList<T> implements List<T> {
 
     public ArrayList() {
         elementData = new Object[ARRAY_SIZE];
-        size = 0;
     }
 
-    private void ensureCapacity() {
+    public void ensureCapacity() {
         if (size == elementData.length) {
             int newCapacity = elementData.length + elementData.length / 2;
             Object[] newArray = new Object[newCapacity];
@@ -21,9 +20,9 @@ public class ArrayList<T> implements List<T> {
         }
     }
 
-    private void validateIndex(int index) {
+    public void validateIndex(int index) {
         if (index < 0 || index >= size) {
-            throw new ArrayListIndexOutOfBoundsException("Not found this index");
+            throw new ArrayListIndexOutOfBoundsException("Not found this index" + index);
         }
     }
 
@@ -37,7 +36,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public void add(T value, int index) {
         if (index < 0 || index > size) {
-            throw new ArrayListIndexOutOfBoundsException("Not found this index");
+            throw new ArrayListIndexOutOfBoundsException("Not found this index" + index);
         }
         ensureCapacity();
         System.arraycopy(elementData, index, elementData, index + 1, size - index);
