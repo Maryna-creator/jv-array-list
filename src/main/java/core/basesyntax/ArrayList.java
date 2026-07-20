@@ -11,21 +11,6 @@ public class ArrayList<T> implements List<T> {
         elementData = new Object[ARRAY_SIZE];
     }
 
-    public void ensureCapacity() {
-        if (size == elementData.length) {
-            int newCapacity = elementData.length + elementData.length / 2;
-            Object[] newArray = new Object[newCapacity];
-            System.arraycopy(elementData, 0, newArray, 0, elementData.length);
-            elementData = newArray;
-        }
-    }
-
-    public void validateIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new ArrayListIndexOutOfBoundsException("Not found this index" + index);
-        }
-    }
-
     @Override
     public void add(T value) {
         ensureCapacity();
@@ -36,7 +21,7 @@ public class ArrayList<T> implements List<T> {
     @Override
     public void add(T value, int index) {
         if (index < 0 || index > size) {
-            throw new ArrayListIndexOutOfBoundsException("Not found this index" + index);
+            throw new ArrayListIndexOutOfBoundsException("Not found this index: " + index);
         }
         ensureCapacity();
         System.arraycopy(elementData, index, elementData, index + 1, size - index);
@@ -91,5 +76,20 @@ public class ArrayList<T> implements List<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    private void ensureCapacity() {
+        if (size == elementData.length) {
+            int newCapacity = elementData.length + elementData.length / 2;
+            Object[] newArray = new Object[newCapacity];
+            System.arraycopy(elementData, 0, newArray, 0, elementData.length);
+            elementData = newArray;
+        }
+    }
+
+    private void validateIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new ArrayListIndexOutOfBoundsException("Not found this index: " + index);
+        }
     }
 }
